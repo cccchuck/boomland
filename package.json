@@ -1,0 +1,24 @@
+{
+  "name": "boomland",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start:dev": "dotenv -e .env.local -- tsx ./src/index.ts",
+    "start:prod": "dotenv -e .env.prod -- node ./dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "viem": "^2.17.8",
+    "winston": "^3.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "dotenv-cli": "^7.4.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}
