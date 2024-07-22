@@ -1,18 +1,15 @@
-import { createPublicClient, createWalletClient, http } from 'viem'
+import {
+  createPublicClient,
+  createWalletClient,
+  http,
+  parseAbiItem,
+} from 'viem'
 import { mnemonicToAccount } from 'viem/accounts'
 import { polygon } from 'viem/chains'
 import { logger } from './utils/logger'
 
 const CONTRACT_ADDRESS = '0x3a1f862d8323138f14494f9fb50c537906b12b81'
-const CLAIM_ABI = [
-  {
-    name: 'requestTokens',
-    type: 'function',
-    stateMutability: 'nonpayable',
-    inputs: [],
-    outputs: [],
-  },
-] as const
+const CLAIM_ABI = 'function requestTokens() external' as const
 
 // Mnemonic
 const MNEMONIC = process.env.MNEMONIC || ''
@@ -44,7 +41,7 @@ const main = async () => {
     const { request } = await publicClient.simulateContract({
       account,
       address: CONTRACT_ADDRESS,
-      abi: CLAIM_ABI,
+      abi: [parseAbiItem(CLAIM_ABI)],
       functionName: 'requestTokens',
     })
     try {
